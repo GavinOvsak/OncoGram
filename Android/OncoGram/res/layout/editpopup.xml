@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/prompt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Patient age: " >
+    </TextView>
+    
+    <EditText
+        android:id="@+id/age"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Age"
+        android:inputType="number" >
+    </EditText>
+
+    <EditText
+        android:id="@+id/birthdate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Patient birthdate mm/dd/yy" >
+    </EditText>
+
+    <RadioGroup
+        android:id="@+id/gender"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <RadioButton
+            android:id="@+id/f"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="onRadioButtonClicked"
+            android:text="Female" />
+
+        <RadioButton
+            android:id="@+id/m"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="onRadioButtonClicked"
+            android:text="Male" />
+
+        <RadioButton
+            android:id="@+id/o"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="onRadioButtonClicked"
+            android:text="Other" />
+    </RadioGroup>
+
+    <EditText
+        android:id="@+id/location"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Current location" >
+    </EditText>
+
+    <EditText
+        android:id="@+id/babybirth"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Expected baby&apos;s birthdate mm/dd/yy" >
+    </EditText>
+
+</LinearLayout>
