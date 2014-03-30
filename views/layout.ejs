@@ -45,7 +45,7 @@
                 <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
                     <ul class="nav navbar-nav">
                         <!-- Hidden li included to remove active class from about link when scrolled up past about section -->
-                         <% if(page == "/"){ %>
+                         <% if(page == "/" && !user){ %>
                         
                             <li class="hidden">
                                 <a href="#page-top"></a>
@@ -59,7 +59,19 @@
                             <li>
                                 <a href="/login">Login</a>
                             </li>
-                         
+                        <% } else if(page == "/" && user) { %>
+                            <li>
+                                <a href="/dashboard">Dashboard</a>
+                            </li>
+                            <li class="page-scroll">
+                                <a href="#about">About</a>
+                            </li>
+                            <li class="page-scroll">
+                                <a href="#mission">Mission</a>
+                            </li>
+                            <li>
+                                <a href="/logout">Logout</a>
+                            </li>
                         <% } else if(page == "/login") { %>
                             
                             

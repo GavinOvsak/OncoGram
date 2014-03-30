@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+
+
+<div class="portfolio">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 col-md-offset-4 text-center">
+                    <h1><%= person.name %>'s Images</h1>
+                    Age: <%= person.age %>; Location: <%= person.lat %>, <%= person.lon %>
+                    <hr>
+                </div>
+            </div>
+            
+            <% for(i=0; i<=images.length/3; i++){ %>
+            	<div class="row">
+            	<% for(j=0; j + i*3 < images.length && j < 3; j++){ %>
+            		<div class="col-md-4 text-center">
+	                    <div class="portfolio-item">
+	                        <img class="img-portfolio img-responsive" alt="Embedded Image" src="data:image/png;base64,<%= images[j+i*3].base64 %>">
+	                    </div>
+                    <button class="btn btn-primary btn-pic edit">
+					  View Image
+					</button>
+               		</div>
+            	<% } %>
+            	</div>
+            <% } %>
+
+        </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h1 class="modal-title text-center" id="myModalLabel">Edit Image</h1>
+      </div>
+
+
+      <div class="modal-body">
+        <img class="img-portfolio img-responsive" id="popupImage" src="../public/img/Eleanor_Roosevelt_.jpg">
+      </div>
+
+      
+
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+<script>
+$('.edit').click(function(){
+	$('#myModal').modal('show');
+	$('#popupImage').attr('src', $(this).parent().find('div img').attr('src'));
+
+	var paper = Raphael(10, 50, 320, 200);
+	var circle = paper.circle(50, 40, 10);
+})
+/*$('#myModal').on('show.bs.modal', function (e) {
+  console.log('TEST');
+
+  //if (!data) return e.preventDefault() // stops modal from being shown
+})*/
+
+
+
+</script>
+
+
+
+
+
+

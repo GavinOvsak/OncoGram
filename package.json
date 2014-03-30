@@ -4,7 +4,7 @@
   "scripts": {
     "start": "node server.js"
   },
-  "version": "0.1.0-10",
+  "version": "0.1.0-18",
   "engines": {
     "node": "v0.8.x"
   },
@@ -20,6 +20,7 @@
     "passport-local": "1.0.0",
     "passport": "0.2.0",
     "ejs": "0.8.5",
+    "request": "2.34.0",
     "twilio": "1.6.0"
   },
   "bundleDependencies": [

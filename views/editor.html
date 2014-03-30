@@ -1,0 +1,1612 @@
+<div class="editor-main-area">
+
+  <div id="canvas-wrapper" class="editor-area flipping">
+
+    <div class="canvas-bg-wrapper">
+      <img class="canvas-bg" src="http://assets0.printio.ru/assets/products/tee/large-back/white-ffde330f3e2a5d24a51b597108a6fdb9.png" style="-webkit-user-select: none; visibility: visible; top: 0px;">
+      <i class="icon icon-question-sign help-trigger" title="" data-toggle="toggle" data-original-title="Сочетание клавиш"></i>
+    <div class="canvas-container" style="-webkit-user-select: none; width: 675px; height: 600px; left: 0px; top: 0px; position: absolute; z-index: 100;"><canvas width="675" height="600" id="canvas" class="lower-canvas" style="left: 0px; top: 0px; position: absolute; width: 675px; height: 600px; -webkit-user-select: none; background-color: rgba(0, 0, 0, 0);"></canvas><canvas class="upper-canvas " width="675" height="600" style="left: 0px; top: 0px; position: absolute; width: 675px; height: 600px; -webkit-user-select: none; cursor: crosshair;"></canvas></div></div>
+
+    <div class="active-opacity-container" style="visibility: hidden;">
+      <div class="active-opacity slider ui-slider ui-slider-vertical ui-widget ui-widget-content ui-corner-all" style="height: 100px" aria-disabled="false"><a class="ui-slider-handle ui-state-default ui-corner-all" href="#" style="bottom: 100%;"></a></div>
+    </div>
+
+    <div class="status-message-container">
+      <div class="status-message" style="display: none; background-color: rgb(239, 243, 246);">Загружается...</div>
+    </div>
+
+    <div class="scaled-images-warning" style="display: none;">
+      Превышен размер картинки (возможен размытый результат)
+      <div class="info-box">
+        ( ? )
+        <div class="tooltip">
+          Некоторые картинки в этом дизайне увеличены до большего размера чем оригинальный.
+          Это может привести к <strong>плохому качеству при печати</strong>.
+          Чтобы этого избежать, уменьшите картинки до оригинального размера или
+          закачайте картинку более высокого разрешения
+          (например, 2000px × 2000px вместо 1000px × 1000px).
+        </div>
+      </div>
+    </div>
+
+    <div class="object-info" style="display: none;">
+      <p>
+        <span>Отступ слева</span>
+        <span id="left-coordinate" class="val">-319</span>
+      </p>
+      <p>
+        <span>Отступ сверху</span>
+        <span id="top-coordinate" class="val">-99</span>
+      </p>
+      <p>
+        <span>Ширина</span>
+        <span id="width" class="val">217</span>
+      </p>
+      <p>
+        <span>Высота</span>
+        <span id="height" class="val">39</span>
+      </p>
+    </div>
+
+    <div class="add-text-add-photo">
+      <button type="button" class="btn btn-info add-text" id="add-text-btn" style="-webkit-user-select: none;" data-original-title="" title="">
+        <span>Добавить текст</span>
+        <i class="icon icon-font icon-white"></i>
+      </button>
+
+      <button type="button" class="btn btn-info add-photo" style="-webkit-user-select: none;" data-original-title="" title="">
+        <span>Добавить фото</span>
+        <i class="icon icon-picture icon-white"></i>
+      </button>
+    </div>
+
+    <div class="active-controls active-object-controls" id="controls-bd" style="display: none;">
+
+  <label for="active-color-input" data-alt-value="Цвет линии:">Цвет:</label>
+  <span class="minicolors minicolors-theme-default minicolors-swatch-position-left minicolors-swatch-left minicolors-position-default"><span class="minicolors-swatch"><span style="background-color: rgb(0, 0, 0);"></span></span><input type="hidden" id="active-color-input" class="minicolors-input" size="7" maxlength="7" value="#000000"><span class="minicolors-panel minicolors-slider-hue"><span class="minicolors-slider"><span class="minicolors-picker" style="top: 0px;"></span></span><span class="minicolors-opacity-slider"><span class="minicolors-picker"></span></span><span class="minicolors-grid" style="background-color: rgb(255, 0, 0);"><span class="minicolors-grid-inner"></span><span class="minicolors-picker" style="top: 150px; left: 0px;"><span></span></span></span></span></span>
+
+  <label for="active-opacity-btn">Прозрачность:</label>
+  <button class="active-opacity-btn btn disabled" type="button" style="-webkit-user-select: none;" disabled="disabled">
+    <em class="active-opacity-value">100</em>%&nbsp;&nbsp;↓
+  </button>
+
+  <button id="menu-btn" class="btn disabled" type="button" style="-webkit-user-select: none;" disabled="disabled">
+    Правка&nbsp;&nbsp;↓
+  </button>
+
+  <button id="effects-btn" class="btn disabled" type="button" style="color: green; -webkit-user-select: none; display: none;" disabled="disabled">
+    Эффекты&nbsp;&nbsp;↓
+  </button>
+
+</div>
+
+    <div id="button-bar" class="canvas-controls" style="display: none;">
+
+  <button type="button" class="btn clear-canvas" style="-webkit-user-select: none;">
+    <i class="icon-trash"></i>
+    Очистить
+  </button>
+
+  <button type="button" class="btn" id="undo" style="-webkit-user-select: none;">
+    <i class="icon-backward"></i>
+    Отменить
+  </button>
+
+  <button type="button" class="btn disabled" id="redo" disabled="disabled" style="-webkit-user-select: none;">
+    <i class="icon-forward"></i>
+    Повторить
+  </button>
+
+  <button type="button" class="btn" id="realistic-preview" style="-webkit-user-select: none;">
+    <i class="icon-picture"></i>
+    Реалистичный просмотр
+  </button>
+
+  <button type="button" class="btn" id="preview-3d" style="display: none; -webkit-user-select: none;">
+    <img alt="3d_black" src="http://assets0.printio.ru/assets/3D_black-68d78c4494a2f378e3af1305d55d4f20.png">
+  </button>
+</div>
+
+
+  </div>
+
+  <div class="sidebar-area">
+
+    <div class="sidebar-inner-container" style="left: -350px;">
+      <ul class="sidebar-nav">
+        <li>
+          <a href="#" class="settings"><span class="icon"></span>Настройки стиля и цвета</a>
+          <i class="icon icon-chevron-right open"></i>
+        </li>
+        <li>
+          <a href="#" class="images"><span class="icon"></span>Мои картинки</a>
+          <span class="add add-photo" title="" data-toggle="tooltip" data-placement="left" data-original-title="Добавить фото">
+            <i class="icon icon-plus icon-white"></i>
+          </span>
+          <i class="icon icon-chevron-right open"></i>
+        </li>
+        <li>
+          <a href="#" class="clipart"><span class="icon"></span>Клипарт</a>
+          <i class="icon icon-chevron-right open"></i>
+        </li>
+        <li>
+          <a href="#" class="text"><span class="icon"></span>Текст</a>
+          <span class="add add-text" title="" data-toggle="tooltip" data-placement="left" data-original-title="Добавить текст">
+            <i class="icon icon-plus icon-white"></i>
+          </span>
+          <i class="icon icon-chevron-right open"></i>
+        </li>
+        <li>
+          <a href="#" class="freedrawing"><span class="icon"></span>Рисование</a>
+          <i class="icon icon-chevron-right open"></i>
+        </li>
+        <li>
+          <a href="#" class="see-on-other"><span class="icon"></span>Посмотреть на другом товаре</a>
+          <i class="icon icon-chevron-right open"></i>
+        </li>
+      </ul>
+
+      <ul class="sidebar-nav-panels">
+        <li style="display: none;">
+          <span class="small-text-header">
+            <button class="btn btn-small btn-back" style="-webkit-user-select: none;">« Назад</button>
+            Настройки стиля и цвета
+          </span>
+
+          <div class="product-options">
+  <div class="body">
+
+    <p class="paper-types-header" style="display:none">Тип бумаги (цены за 100 шт. 1 сторона/2 стороны):</p>
+    <ul class="paper-types" style="display:none"></ul>
+
+    <div class="paper-options" style="display:none">
+      <hr style="border:none;border-top:1px solid #ccc">
+
+      <label for="paper-lamination">Ламинирование</label>
+      <select id="paper-lamination">
+        <option value="none">отсутствует</option>
+        <option value="glossy">глянцевое</option>
+        <option value="matte">матовое</option>
+      </select>
+      <label for="rounded-corners-toggler">
+        Закругленные края (4mm)
+        <i class="paper-option-price"></i>
+      </label>
+      <input type="checkbox" id="rounded-corners-toggler">
+    </div>
+
+    <label for="bg-color-input" style="display: none;">
+      Цвет фона
+      <span class="minicolors minicolors-theme-default minicolors-swatch-position-left minicolors-swatch-left minicolors-position-top"><span class="minicolors-swatch"><span></span></span><span class="minicolors-panel minicolors-slider-hue"><span class="minicolors-slider"><span class="minicolors-picker" style="top: 0px;"></span></span><span class="minicolors-opacity-slider"><span class="minicolors-picker"></span></span><span class="minicolors-grid" style="background-color: rgb(255, 0, 0);"><span class="minicolors-grid-inner"></span><span class="minicolors-picker" style="top: 150px; left: 0px;"><span></span></span></span><input id="bg-color-input" class="minicolors-input" size="7" maxlength="7"></span></span>
+      <a href="#" class="remove-product-bg" style="display:none">Убрать фон</a>
+    </label>
+
+    <p class="product-colors-header" style="">Цвет</p>
+    <ul class="product-colors product-option-cells selectable"><li><a href="#" style="background:#ffffff" data-color-name="white" class="inverted active" title="" data-original-title="белый"></a></li><li><a href="#" style="background:#bcbcbc" data-color-name="melange" class="" title="" data-original-title="меланж"></a></li><li><a href="#" style="background:#d0c79c" data-color-name="beige" class="" title="" data-original-title="бежевый"></a></li><li><a href="#" style="background:#DEC63F" data-color-name="yellow" class="" title="" data-original-title="жёлтый"></a></li><li><a href="#" style="background:#E96B10" data-color-name="orange" class="" title="" data-original-title="оранжевый"></a></li><li><a href="#" style="background:#D21034" data-color-name="red" class="" title="" data-original-title="красный"></a></li><li><a href="#" style="background:#296DC1" data-color-name="bright-blue" class="" title="" data-original-title="ярко-синий"></a></li><li><a href="#" style="background:#000000" data-color-name="black" class="" title="" data-original-title="чёрный"></a></li></ul>
+  </div>
+</div>
+
+        </li>
+        <li style="display: none;">
+          <span class="small-text-header">
+            <button class="btn btn-small btn-back" style="-webkit-user-select: none;">« Назад</button>
+            Мои картинки
+          </span>
+
+          <div data-for="add-image" class="add-image">
+
+  <span class="no-images">
+    Вы ещё не закачали ни одной картинки. Просто нажмите кнопку "Добавить фото" слева.
+  </span>
+
+  <ul class="uploaded-images list-wrapper"></ul>
+</div>
+
+        </li>
+        <li style="display: none;">
+          <span class="small-text-header">
+            <button class="btn btn-small btn-back" style="-webkit-user-select: none;">« Назад</button>
+            Клипарт
+          </span>
+
+          <div data-for="add-shape" class="add-shape">
+    <p class="title notification instructions add-shape-instruction">
+  Щёлкни на картинку, чтобы добавить её на предмет.
+  <a class="discard-btn ignore-hints" rel="no-follow"></a>
+</p>
+
+
+  <div class="list-wrapper">
+    <ul class="clipart">
+        <li>
+          <a href="/shapes/svg/0014.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0014.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0002.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0002.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0106.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0106.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0142.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0142.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0049.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0049.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0030.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0030.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0013.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0013.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0149.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0149.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0110.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0110.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0166.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0166.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0195.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0195.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0011.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0011.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0096.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0096.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0155.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0155.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0150.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0150.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0086.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0086.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0052.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0052.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0089.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0089.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0059.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0059.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0029.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0029.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0083.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0083.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0189.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0189.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0164.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0164.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0145.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0145.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0067.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0067.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0168.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0168.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0171.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0171.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0158.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0158.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0027.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0027.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0016.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0016.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0068.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0068.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0121.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0121.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0125.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0125.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0126.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0126.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0102.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0102.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0095.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0095.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0040.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0040.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0005.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0005.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0071.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0071.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0094.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0094.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0064.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0064.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0135.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0135.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0160.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0160.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0105.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0105.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0069.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0069.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0041.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0041.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0042.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0042.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0170.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0170.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0123.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0123.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0092.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0092.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0006.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0006.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0128.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0128.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0162.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0162.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0167.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0167.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0081.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0081.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0024.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0024.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0076.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0076.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0130.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0130.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0009.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0009.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0055.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0055.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0079.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0079.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0129.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0129.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0193.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0193.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0113.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0113.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0114.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0114.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0180.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0180.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0120.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0120.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0008.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0008.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0093.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0093.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0023.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0023.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0028.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0028.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0116.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0116.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0073.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0073.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0196.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0196.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0127.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0127.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0197.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0197.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0017.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0017.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0074.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0074.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0181.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0181.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0161.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0161.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0184.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0184.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0046.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0046.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0015.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0015.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0037.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0037.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0077.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0077.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0080.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0080.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0192.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0192.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0022.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0022.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0122.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0122.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0151.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0151.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0020.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0020.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0183.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0183.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0034.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0034.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0057.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0057.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0147.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0147.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0186.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0186.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0098.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0098.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0075.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0075.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0051.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0051.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0100.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0100.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0194.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0194.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0003.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0003.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0103.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0103.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0085.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0085.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0104.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0104.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0144.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0144.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0188.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0188.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0050.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0050.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0172.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0172.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0156.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0156.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0007.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0007.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0048.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0048.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0043.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0043.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0038.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0038.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0035.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0035.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0026.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0026.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0139.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0139.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0175.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0175.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0082.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0082.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0072.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0072.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0115.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0115.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0119.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0119.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0101.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0101.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0045.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0045.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0148.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0148.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0088.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0088.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0061.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0061.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0140.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0140.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0036.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0036.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0169.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0169.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0179.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0179.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0021.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0021.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0053.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0053.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0004.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0004.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0191.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0191.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0159.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0159.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0001.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0001.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0132.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0132.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0131.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0131.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0174.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0174.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0185.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0185.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0157.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0157.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0107.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0107.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0163.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0163.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0118.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0118.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0044.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0044.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0078.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0078.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0137.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0137.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0117.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0117.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0152.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0152.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0031.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0031.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0056.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0056.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0099.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0099.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0134.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0134.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0108.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0108.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0190.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0190.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0138.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0138.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0153.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0153.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0010.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0010.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0154.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0154.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0018.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0018.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0124.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0124.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0058.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0058.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0112.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0112.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0063.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0063.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0019.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0019.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0060.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0060.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0109.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0109.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0176.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0176.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0097.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0097.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0182.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0182.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0012.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0012.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0178.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0178.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0033.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0033.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0165.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0165.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0173.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0173.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0070.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0070.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0025.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0025.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0062.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0062.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0084.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0084.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0136.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0136.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0187.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0187.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0143.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0143.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0087.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0087.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0091.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0091.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0146.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0146.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0141.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0141.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0090.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0090.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0065.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0065.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0047.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0047.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0054.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0054.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0133.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0133.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0066.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0066.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0177.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0177.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0039.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0039.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0032.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0032.png">
+          </a>
+        </li>
+        <li>
+          <a href="/shapes/svg/0111.svg" title="" class="shape-thumb">
+            <img class="img ui-draggable" data-src="/shapes/png/0111.png">
+          </a>
+        </li>
+    </ul>
+  </div>
+</div>
+        </li>
+        <li style="display: none;">
+          <span class="small-text-header">
+            <button class="btn btn-small btn-back" style="-webkit-user-select: none;">« Назад</button>
+            Текст
+            <span class="add add-text" title="" data-original-title="Добавить текст">
+              <i class="icon icon-plus icon-white"></i>
+            </span>
+          </span>
+          <button type="button" class="btn btn-info add-text" id="add-text-btn" style="margin-top: 10px; margin-bottom: 5px; -webkit-user-select: none;" data-original-title="" title="">
+            <span>Добавить текст</span>
+          </button>
+          <ul class="canvas-objects"><div class="canvas-object text canvas-group collapsed">    <div class="body">      <textarea placeholder="" disabled="">Вы редактируете группу текстов</textarea>    </div>    <div class="controls">      <button class="btn choose-font-btn" type="button">        <span>Шрифт</span>&nbsp;&nbsp;↓      </button>      <div class="select2-container font-size-select" id="s2id_autogen2" style="width: 50px" title="" data-original-title="Размер текста">    <a href="#" onclick="return false;" class="select2-choice">   <span>18</span><abbr class="select2-search-choice-close" style="display:none;"></abbr>   <div><b></b></div></a>    <div class="select2-drop select2-offscreen">   <div class="select2-search">       <input type="text" autocomplete="off" class="select2-input">   </div>   <ul class="select2-results">   </ul></div></div><input class="font-size-select" type="hidden" style="width: 50px; display: none;" title="" value="18" data-original-title="Размер текста">      <span class="minicolors minicolors-theme-default minicolors-swatch-position-left minicolors-swatch-left minicolors-with-opacity minicolors-position-left" title="" data-original-title="Цвет текста"><span class="minicolors-swatch"><span style="background-color: rgb(0, 0, 0);"></span></span><span class="icon-wrapper"><i class="icon-font"></i></span><span class="minicolors-panel minicolors-slider-hue"><span class="minicolors-slider"><span class="minicolors-picker" style="top: 0px;"></span></span><span class="minicolors-opacity-slider"><span class="minicolors-picker"></span></span><span class="minicolors-grid" style="background-color: rgb(255, 0, 0);"><span class="minicolors-grid-inner"></span><span class="minicolors-picker" style="top: 150px; left: 0px;"><span></span></span></span><input class="text-color-input minicolors-input" title="" size="7" maxlength="7" data-opacity="NaN" data-original-title="Цвет текста"><a href="#" class="remove-color">Убрать цвет</a></span></span>      <span class="minicolors minicolors-theme-default minicolors-swatch-position-left minicolors-swatch-left minicolors-with-opacity minicolors-position-left" title="" data-original-title="Цвет фона текста"><span class="minicolors-swatch"><span></span></span><span class="icon-wrapper"><i class="icon-text-bg"></i></span><span class="minicolors-panel minicolors-slider-hue"><span class="minicolors-slider"><span class="minicolors-picker" style="top: 0px;"></span></span><span class="minicolors-opacity-slider"><span class="minicolors-picker"></span></span><span class="minicolors-grid" style="background-color: rgb(255, 0, 0);"><span class="minicolors-grid-inner"></span><span class="minicolors-picker" style="top: 150px; left: 0px;"><span></span></span></span><input class="text-bg-color-input minicolors-input" title="" size="7" maxlength="7" data-opacity="NaN" data-original-title="Цвет фона текста"><a href="#" class="remove-color">Убрать цвет</a></span></span>      <button class="btn font-options-btn" type="button" title="" data-original-title="Настройки шрифта">        <i class="icon-bold"></i>      </button>      <button class="btn line-height-btn" type="button" title="" data-original-title="Междустрочный интервал">        <i class="icon-text-height"></i>      </button>      <button class="btn text-align-btn" type="button" title="" data-original-title="Выравнивание текста">        <span></span>      </button>      <button class="btn text-delete-btn btn-danger delete" type="button" title="" data-original-title="Удалить">        <i class="icon-remove icon-white"></i>       </button>    </div>  </div></ul>
+        </li>
+        <li style="display: block;" class="freedrawing-section">
+          <span class="small-text-header">
+            <button class="btn btn-small btn-back" style="-webkit-user-select: none;">« Назад</button>
+            Рисование
+          </span>
+          <p>
+            <button class="btn free-drawing-btn btn-warning" data-alt-value="Завершить режим рисования" style="-webkit-user-select: none;">Завершить режим рисования</button>
+          </p>
+          <div class="free-drawing-controls" style="">
+            <p>
+              <label>Стиль рисования:</label>
+              </p><ul class="freedrawing-styles">
+                <li><a href="#" class="pencil" title="Карандаш"></a></li>
+                <!-- <li><a href="#" class="circles" title="Круги"></a></li>
+                <li><a href="#" class="spray" title="Спрей"></a></li>-->
+                <li><a href="#" class="pattern-circles" title="Узор (круги)"></a></li>
+                <li><a href="#" class="pattern-lines-v" title="Узор (линии гориз.)"></a></li>
+                <li><a href="#" class="pattern-lines-h" title="Узор (линии верт.)"></a></li>
+                <li><a href="#" class="pattern-grid" title="Узор (сетка)"></a></li>
+              </ul>
+            <p></p>
+            <p>
+              <label>Цвет кисти:</label>
+              <span class="minicolors minicolors-theme-default minicolors-swatch-position-left minicolors-swatch-left minicolors-position-default"><span class="minicolors-swatch"><span style="background-color: rgb(0, 94, 122);"></span></span><input type="hidden" class="free-drawing-color minicolors-input" value="#005e7a" size="7" maxlength="7"><span class="minicolors-panel minicolors-slider-hue"><span class="minicolors-slider"><span class="minicolors-picker" style="top: 69.26229508196721px;"></span></span><span class="minicolors-opacity-slider"><span class="minicolors-picker"></span></span><span class="minicolors-grid" style="background-color: rgb(0, 196, 255);"><span class="minicolors-grid-inner"></span><span class="minicolors-picker" style="top: 78px; left: 150px;"><span></span></span></span></span></span>
+            </p>
+            <p>
+              <label>Толщина кисти:</label>
+              <div class="select2-container free-drawing-width" id="s2id_autogen1">    <a href="#" onclick="return false;" class="select2-choice">   <span>3px</span><abbr class="select2-search-choice-close" style="display:none;"></abbr>   <div><b></b></div></a>    <div class="select2-drop select2-offscreen">   <div class="select2-search">       <input type="text" autocomplete="off" class="select2-input">   </div>   <ul class="select2-results">   </ul></div></div><select class="free-drawing-width" style="display: none;">
+                <option value="1">1px</option>
+                <option value="2">2px</option>
+                <option value="3" selected="">3px</option>
+                <option value="4">4px</option>
+                <option value="8">8px</option>
+                <option value="12">12px</option>
+                <option value="16">16px</option>
+                <option value="24">24px</option>
+                <option value="43">32px</option>
+                <option value="40">40px</option>
+                <option value="48">48px</option>
+                <option value="60">60px</option>
+              </select>
+            </p>
+            <p>
+              <label>Тень кисти:</label>
+              <input type="checkbox" class="free-drawing-shadow">
+            </p>
+          </div>
+        </li>
+        <li style="display: none;">
+          <span class="small-text-header">
+            <button class="btn btn-small btn-back" style="-webkit-user-select: none;">« Назад</button>
+            Посмотреть на другом товаре
+          </span>
+
+          <div class="body change-product">
+            <ul class="other-products">
+                <li data-url="/tees/new?product_id=" data-product="tee" class="active">
+
+                  <img data-src="http://assets0.printio.ru/assets/products/tee/small-front/black-a6d57649a50130f40ef8a02d5e43281b.png">
+
+                  <span class="caption">
+                    Футболка
+                  </span>
+                </li>
+                <li data-url="/woman_tees/new?product_id=" data-product="woman_tee" class="">
+
+                  <img data-src="http://assets0.printio.ru/assets/products/woman_tee/small-front/black-ea079ba1e7aa3726fdc8aeca9ba58c5e.png">
+
+                  <span class="caption">
+                    Футболка (Женская)
+                  </span>
+                </li>
+                <li data-url="/man_stretch_tees/new?product_id=" data-product="man_stretch_tee" class="">
+
+                  <img data-src="http://assets0.printio.ru/assets/products/man_stretch_tee/small-front/white-84e06112e24a81ddfbd797677d41b767.png">
+
+                  <span class="caption">
+                    Футболка Стрэйч (Мужская)
+                  </span>
+                </li>
+                <li data-url="/stretch_tees/new?product_id=" data-product="stretch_tee" class="">
+
+                  <img data-src="http://assets0.printio.ru/assets/products/stretch_tee/small-front/white-5042ac540a609ea227aa155cff16326d.png">
+
+                  <span class="caption">
+                    Футболка Стрэйч (Женская)
+                  </span>
+                </li>
+                <li data-url="/ringer_man_tees/new?product_id=" data-product="ringer_man_tee" class="">
+
+                  <img data-src="http://assets0.printio.ru/assets/products/ringer_man_tee/small-front/white-0918eb1bb8a665c599934cf27703829b.png">
+
+                  <span class="caption">
+                    Футболка "Рингер" (Мужская)
+                  </span>
+                </li>
+                <li data-url="/ringer_woman_tees/new?product_id=" data-product="ringer_woman_tee" class="">
+
+                  <img data-src="http://assets0.printio.ru/assets/products/ringer_woman_tee/small-front/white-93d80c06af682422739ba2251e35ee0f.png">
+
+                  <span class="caption">
+                    Футболка "Рингер" (Женская)
+                  </span>
+                </li>
+                <li data-url="/hoodies/new?product_id=" data-product="hoodie" class="">
+
+                  <img data-src="http://assets0.printio.ru/assets/products/hoodie/small-front/black-be04e1acc6a20e048ffe3e79509f5ec8.png">
+
+                  <span class="caption">
+                    Толстовка
+                  </span>
+                </li>
+                <li data-url="/longsleeves/new?product_id=" data-product="longsleeve" class="">
+
+                  <img data-src="http://assets0.printio.ru/assets/products/longsleeve/small-front/black-b4849b0baaed64ef182d025981b92f82.png">
+
+                  <span class="caption">
+                    Фуфайка
+                  </span>
+                </li>
+                <li data-url="/polo_shirts/new?product_id=" data-product="polo_shirt" class="">
+
+                  <img data-src="http://assets0.printio.ru/assets/products/polo_shirt/small-front/white-e807871e09b0d6ed94da8f7fbdfc3c03.png">
+
+                  <span class="caption">
+                    Рубашка Поло
+                  </span>
+                </li>
+                <li data-url="/woman_polos/new?product_id=" data-product="woman_polo" class="">
+
+                  <img data-src="http://assets0.printio.ru/assets/products/woman_polo/small-front/red-a83a19caf50f2584fc27af87eb92885e.png">
+
+                  <span class="caption">
+                    Рубашка Поло (Женская)
+                  </span>
+                </li>
+                <li data-url="/maternity_tees/new?product_id=" data-product="maternity_tee" class="">
+
+                  <img data-src="http://assets0.printio.ru/assets/products/maternity_tee/small-front/white-6f6a30447a7a1df2ddba9a16218658e0.png">
+
+                  <span class="caption">
+                    Футболка для беременных
+                  </span>
+                </li>
+                <li data-url="/kids_tees/new?product_id=" data-product="kids_tee" class="">
+
+                  <img data-src="http://assets0.printio.ru/assets/products/kids_tee/small-front/white-c66a921669172186c7310a7d8ae76c25.png">
+
+                  <span class="caption">
+                    Детская футболка
+                  </span>
+                </li>
+                <li data-url="/tanktops/new?product_id=" data-product="tanktop" class="">
+
+                  <img data-src="http://assets0.printio.ru/assets/products/tanktop/small-front/white-481d9b01c17a9725ddc561f98cbef530.png">
+
+                  <span class="caption">
+                    Майка (Мужская)
+                  </span>
+                </li>
+                <li data-url="/woman_tanktops/new?product_id=" data-product="woman_tanktop" class="">
+
+                  <img data-src="http://assets0.printio.ru/assets/products/woman_tanktop/small-front/white-11543f9d60fe61863875a66d60c27318.png">
+
+                  <span class="caption">
+                    Майка (Женская)
+                  </span>
+                </li>
+                <li data-url="/hats/new?product_id=" data-product="hat" class="">
+
+                  <img data-src="http://assets0.printio.ru/assets/products/hat/small-front/white-08be4384075a078b83b2a712b55df6a4.png">
+
+                  <span class="caption">
+                    Кепка
+                  </span>
+                </li>
+                <li data-url="/mouse_pads/new?product_id=" data-product="mouse_pad" class="">
+
+                  <img data-src="http://assets0.printio.ru/assets/products/mouse_pad/small-2dab5fce66f6053f51c2622b6aa8b40a.png">
+
+                  <span class="caption">
+                    Коврик для мышки
+                  </span>
+                </li>
+                <li data-url="/round_mouse_pads/new?product_id=" data-product="round_mouse_pad" class="">
+
+                  <img data-src="http://assets0.printio.ru/assets/products/round_mouse_pad/front-small-b56af778fda86e503091b05172522da0.png">
+
+                  <span class="caption">
+                    Коврик для мышки (круглый)
+                  </span>
+                </li>
+                <li data-url="/small_envelopes/new?product_id=" data-product="small_envelope" class="">
+
+                  <img data-src="http://assets0.printio.ru/assets/products/small_envelope/small-af61852067408900e776823089f037f9.png">
+
+                  <span class="caption">
+                    Конверт маленький "Евро" Е65
+                  </span>
+                </li>
+                <li data-url="/medium_envelopes/new?product_id=" data-product="medium_envelope" class="">
+
+                  <img data-src="http://assets0.printio.ru/assets/products/medium_envelope/small-5784b7f6470eed8731c10afc7ca08077.png">
+
+                  <span class="caption">
+                    Конверт средний С5
+                  </span>
+                </li>
+                <li data-url="/large_envelopes/new?product_id=" data-product="large_envelope" class="">
+
+                  <img data-src="http://assets0.printio.ru/assets/products/large_envelope/small-cd87d3d7296cbd149dd54cfc6dd45bf4.png">
+
+                  <span class="caption">
+                    Конверт большой С4
+                  </span>
+                </li>
+                <li data-url="/puzzle_a3s/new?product_id=" data-product="puzzle_a3" class="">
+
+                  <img data-src="http://assets0.printio.ru/assets/products/puzzle_a3/small-8ff60f1695a33233ce12932ce169afb6.png">
+
+                  <span class="caption">
+                    Пазл большой
+                  </span>
+                </li>
+                <li data-url="/puzzle_a4s/new?product_id=" data-product="puzzle_a4" class="">
+
+                  <img data-src="http://assets0.printio.ru/assets/products/puzzle_a4/small-cb652f7a3e5bc21524b1a9bbfd479654.png">
+
+                  <span class="caption">
+                    Пазл маленький
+                  </span>
+                </li>
+                <li data-url="/bags/new?product_id=" data-product="bag" class="">
+
+                  <img data-src="http://assets0.printio.ru/assets/products/bag/small-front-51d40efa6b3bc9873094a7eb62ab598a.png">
+
+                  <span class="caption">
+                    Сумка
+                  </span>
+                </li>
+                <li data-url="/stone_photo_frames/new?product_id=" data-product="stone_photo_frame" class="">
+
+                  <img data-src="http://assets0.printio.ru/assets/products/stone_photo_frame/small-9ff3c99e7109d131ecbff644e43a01b8.png">
+
+                  <span class="caption">
+                    Каменная рамка
+                  </span>
+                </li>
+                <li data-url="/iphone5_glossy_cases/new?product_id=" data-product="iphone5_glossy_case" class="">
+
+                  <img data-src="http://assets0.printio.ru/assets/products/iphone5_glossy_case/small-front-9756f7a83facbde817db3008fa5d8f2a.png">
+
+                  <span class="caption">
+                    Чехол для iPhone 5 глянцевый, с полной запечаткой
+                  </span>
+                </li>
+                <li data-url="/iphone5_kickstand_cases/new?product_id=" data-product="iphone5_kickstand_case" class="">
+
+                  <img data-src="http://assets0.printio.ru/assets/products/iphone5_kickstand_case/small-front-4f4be6b83f40cf7dc3663f783e49a470.png">
+
+                  <span class="caption">
+                    Чехол для iPhone 5 с подставкой, с полной запечаткой
+                  </span>
+                </li>
+                <li data-url="/iphone5_cases/new?product_id=" data-product="iphone5_case" class="">
+
+                  <img data-src="http://assets0.printio.ru/assets/products/iphone5_case/small-front/white-44866ec46ff6b3e66fbf8bdde1b43d2e.png">
+
+                  <span class="caption">
+                    Чехол для iPhone 5
+                  </span>
+                </li>
+                <li data-url="/galaxy_s2_cases/new?product_id=" data-product="galaxy_s2_case" class="">
+
+                  <img data-src="http://assets0.printio.ru/assets/products/galaxy_s2_case/small-front-71af73694727312668d992d4b3de5357.png">
+
+                  <span class="caption">
+                    Чехол Samsung Galaxy S2
+                  </span>
+                </li>
+                <li data-url="/galaxy_s3_cases/new?product_id=" data-product="galaxy_s3_case" class="">
+
+                  <img data-src="http://assets0.printio.ru/assets/products/galaxy_s3_case/small-front-4a412e19d1b982d784e4ab3388ecfe1d.png">
+
+                  <span class="caption">
+                    Чехол Samsung Galaxy S3
+                  </span>
+                </li>
+                <li data-url="/galaxy_s4_cases/new?product_id=" data-product="galaxy_s4_case" class="">
+
+                  <img data-src="http://assets0.printio.ru/assets/products/galaxy_s4_case/small-front-ac8e03fb5c7802fada850ebac9bc8f83.png">
+
+                  <span class="caption">
+                    Чехол Samsung Galaxy S4
+                  </span>
+                </li>
+                <li data-url="/galaxy_note_cases/new?product_id=" data-product="galaxy_note_case" class="">
+
+                  <img data-src="http://assets0.printio.ru/assets/products/galaxy_note_case/small-front-13a84bfab674adadecfd549525fb57cc.png">
+
+                  <span class="caption">
+                    Чехол Samsung Galaxy Note
+                  </span>
+                </li>
+                <li data-url="/galaxy_note2_cases/new?product_id=" data-product="galaxy_note2_case" class="">
+
+                  <img data-src="http://assets0.printio.ru/assets/products/galaxy_note2_case/small-front-448d1f17aff95725215a2cbdac7794c5.png">
+
+                  <span class="caption">
+                    Чехол Samsung Galaxy Note 2
+                  </span>
+                </li>
+                <li data-url="/iphone4_glossy_cases/new?product_id=" data-product="iphone4_glossy_case" class="">
+
+                  <img data-src="http://assets0.printio.ru/assets/products/iphone4_glossy_case/small-front-9756f7a83facbde817db3008fa5d8f2a.png">
+
+                  <span class="caption">
+                    Чехол для iPhone 4 глянцевый, с полной запечаткой
+                  </span>
+                </li>
+                <li data-url="/bibs/new?product_id=" data-product="bib" class="">
+
+                  <img data-src="http://assets0.printio.ru/assets/products/bib/small-front/pink-b0317e80c22385afa6f067b4c7463b67.png">
+
+                  <span class="caption">
+                    Слюнявчик
+                  </span>
+                </li>
+                <li data-url="/aprons/new?product_id=" data-product="apron" class="">
+
+                  <img data-src="http://assets0.printio.ru/assets/products/apron/small-front-f7ccc9f4b9f11ccde83dec9b17e9ecbe.png">
+
+                  <span class="caption">
+                    Фартук
+                  </span>
+                </li>
+                <li data-url="/square_pillows/new?product_id=" data-product="square_pillow" class="">
+
+                  <img data-src="http://assets0.printio.ru/assets/products/square_pillow/small-front/gold-e2c51ddc8e1513589f55df96378460a9.png">
+
+                  <span class="caption">
+                    Подушка
+                  </span>
+                </li>
+                <li data-url="/heart_mouse_pads/new?product_id=" data-product="heart_mouse_pad" class="">
+
+                  <img data-src="http://assets0.printio.ru/assets/products/heart_mouse_pad/front-small-d6cf7f4608d015200ac797c3c6518582.png">
+
+                  <span class="caption">
+                    Коврик для мышки (сердце)
+                  </span>
+                </li>
+                <li data-url="/iphone4_cases/new?product_id=" data-product="iphone4_case" class="">
+
+                  <img data-src="http://assets0.printio.ru/assets/products/iphone4_case/small/white-4a3a4a852b8c0991e4bbcc7b326a802c.png">
+
+                  <span class="caption">
+                    Чехол для iPhone 4/4S
+                  </span>
+                </li>
+            </ul>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <div class="buy-options" id="price-wrapper">
+      <button class="btn btn-success btn-large btn-add-to-cart" id="add-to-cart-btn" style="-webkit-user-select: none;">
+        <i class="icon-shopping-cart icon-white"></i>Купить
+      </button>
+
+      <span class="price">
+        <span id="total-price">850.00</span> р.
+        <span class="price-info"></span>
+      </span>
+
+      <p class="you-can-also">
+        <button type="submit" class="btn btn-small" id="save-design" style="-webkit-user-select: none;">
+          <i class="icon-hdd"></i>
+          Сохранить
+        </button>
+          <button type="submit" class="btn btn-small" id="sell-this-item-btn" style="-webkit-user-select: none;">
+            <i class="icon-share-alt"></i>
+            Выставить на продажу
+          </button>
+      </p>
+    </div>
+  </div>
+
+</div>

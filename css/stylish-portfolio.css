@@ -21,11 +21,7 @@ h1, h2 {
   font-size: 4.5em;
   font-weight: 700;
   
-  text-shadow:
-    -1px -1px 0 #000,
-    1px -1px 0 #000,
-    -1px 1px 0 #000,
-    1px 1px 0 #000;  
+  text-shadow: 4px 4px #FAAFBE;
 }
 
 /* Side Menu */
@@ -119,6 +115,8 @@ h1, h2 {
   display: table;
   height: 100%;
   width: 100%;
+  color: rgb(22,145,158);
+
   position: relative;
   background: url(../public/img/doctor-patient.jpg) no-repeat center center fixed; 
   -webkit-background-size: cover;
@@ -135,15 +133,25 @@ h1, h2 {
 
 /* Login */
 .login {
-  padding: 100px 0;
+  padding: 75px 0;
+  /*background: rgb(22,145,158);*/
+  /*background: #243640;*/
+  background: url(../public/img/cervical_cancer_screening2.jpg) no-repeat center center;  
+  color: rgb(22,145,158);
+  height:100%;
+  background-size: 120%;
+  
+  font-family: 'Ubuntu', sans-serif;
 }
 
 /* Services */
 
 .services {
-  background: #243640;
+  background: rgb(22,145,158);
+  /*background: #243640;*/
   padding: 50px 0;
   color: #ffffff;
+  
 }
 
 .service-item {
@@ -162,24 +170,13 @@ i.service-icon {
   text-align: center;
 }
 
-/* Callout */
 
-.callout {
-  color: #ffffff;
-  display: table;
-  height: 300px;
-  width: 100%;
-  background: url(../img/whoweare.jpg) no-repeat center center fixed; 
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-}
 
 /* Portfolio */
 
 .portfolio {
   padding: 50px 0;
+  font-family: 'Ubuntu', sans-serif;
 }
 
 .portfolio-item {
@@ -190,29 +187,32 @@ i.service-icon {
   margin: 0 auto;
 }
 
+/* Dashboard */
+.dashboard {
+  padding: 100px 0;
+  font-family: 'Ubuntu', sans-serif;
 
-/* Call to Action */
-
-.call-to-action {
-  color: #ffffff;
-  background: #0a5175;
-  padding: 50px 0;
 }
 
-.call-to-action .btn {
-  margin: 10px;
-}
 
 /* Map */
 
 #map {
   height: 75%;
 }
+.maps {
+  color: #ffffff;
+  background: url(../public/img/sea.jpg) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
 
 /* Footer */
 
 footer {
-  padding: 100px 0;
+  padding: 50px 0;
 }
 
 .top-scroll {
@@ -249,6 +249,11 @@ i.scroll:hover {
 
 }
 
+.btn-pic {
+    margin-bottom:30px;
+    margin-top:-20px;
+    font-family: 'Ubuntu', sans-serif;
+}
 .btn-circle {
     width: 70px;
     height: 70px;
@@ -291,6 +296,7 @@ i.scroll:hover {
 
 
 .navbar {
+
     margin-bottom: 0;
     border-bottom: 1px solid rgba(255,255,255,.3);
     text-transform: uppercase;
@@ -308,7 +314,7 @@ i.scroll:hover {
 }
 
 .navbar-custom a {
-    color: #000;
+    color:rgb(22,145,158);
 }
 
 .navbar-custom .nav li a {
@@ -348,7 +354,7 @@ i.scroll:hover {
 
     .top-nav-collapse {
         padding: 0;
-        background-color: rgba(22, 145, 158, 1.0);
+        background-color: rgba(255,255,255, 1.0);
     }
 
     .navbar-custom.top-nav-collapse {
@@ -357,9 +363,3 @@ i.scroll:hover {
 }
 
 /* Font Edits */
-
-h1 {
-  color:#008080;
-  outline-color: black;
-  outline-width: 10px;
-}
